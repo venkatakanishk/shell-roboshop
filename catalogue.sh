@@ -7,6 +7,7 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 SCRIPT_DIR=$PWD
+MONGO_HOST="mongo.naniops.online"
 
 if [ $USERID -ne 0 ]; then
     echo -e "$R please run the script with root user access $N" | tee -a $LOG_FILE
@@ -62,3 +63,18 @@ VALIDATE $? "Service file is updated"
 systemctl enable catalogue 
 systemctl start catalogue
 VALIDATE $? "Enabling and staring catalogue"
+cp $SCRIPT_DIR/mongo.repo /etc/yum.repos.d/mongo.repo
+VALIDATE $? "Copying the Mongo repo file"
+dnf install mongodb-mongosh -y
+VALIDATE $? "Installing mongoDB client"
+INDEX=$(mongosh --host $MONGODB_HOST --quiet  --eval 'db.getMongo().getDBNames().indexOf("catalogue")')
+if [ $INDEX -le 0 ]; then
+    mongosh --host $MONGO_HOST </app/db/master-data.js
+    VALIDATE $? "products Loading"
+else
+    echo -e "products already loaded....$Y skipping $N"
+fi
+systemctl restart catalogue
+VALIDATE $? "Restarting Catalogue"
+
+
