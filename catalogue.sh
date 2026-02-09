@@ -7,7 +7,7 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 SCRIPT_DIR=$PWD
-MONGO_HOST="mongo.naniops.online"
+MONGO_HOST=mongo.naniops.online
 
 if [ $USERID -ne 0 ]; then
     echo -e "$R please run the script with root user access $N" | tee -a $LOG_FILE
