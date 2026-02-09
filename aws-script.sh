@@ -21,7 +21,8 @@ do
             aws ec2 describe-instances \
             --instance-ids $INSTANCE_ID \
             --query 'Reservations[].Instances[].PublicIpAddress' \
-            --output text )
+            --output text
+        )
         RECORD_NAME="$DOMAIN_NAME" 
     else
         IP=$(
