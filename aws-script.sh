@@ -5,7 +5,6 @@ AMI_ID="ami-0220d79f3f480ecf5"
 ZONE_ID="Z0567049359BNL7TKMKE9"
 DOMAIN_NAME="naniops.online"
 
-
 for instance in $@
 do
     INSTANCE_ID=$( aws ec2 run-instances \
