@@ -54,6 +54,8 @@ cp catalogue.service /etc/systemd/system/catalogue.service
 VALIDATE $? "Catalogue service file is created"
 
 systemctl daemon-reload
+VALIDATE $? "Service file is updated"
 systemctl enable catalogue 
 systemctl start catalogue
 VALIDATE $? "Enabling and staring catalogue"
+
