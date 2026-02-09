@@ -16,7 +16,7 @@ do
     --query 'Instances[0].InstanceId' \
     --output text )
 
-    if [ $instance == frontend]; then
+    if [ $instance == "frontend" ]; then
         IP=$(
         aws ec2 describe-instances \
         --instance-ids $INSTANCE_ID \
@@ -34,7 +34,7 @@ do
     fi
 
     echo "IP ADDRESS IS : $IP"
-    
+
     aws route53 change-resource-record-sets \
     --hosted-zone-id $ZONE_ID \
     --change-batch '
