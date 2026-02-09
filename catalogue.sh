@@ -67,7 +67,7 @@ cp $SCRIPT_DIR/mongo.repo /etc/yum.repos.d/mongo.repo
 VALIDATE $? "Copying the Mongo repo file"
 dnf install mongodb-mongosh -y
 VALIDATE $? "Installing mongoDB client"
-INDEX=$(mongosh --host $MONGODB_HOST --quiet  --eval 'db.getMongo().getDBNames().indexOf("catalogue")')
+INDEX=$(mongosh --host $MONGO_HOST --quiet  --eval 'db.getMongo().getDBNames().indexOf("catalogue")')
 if [ $INDEX -le 0 ]; then
     mongosh --host $MONGO_HOST </app/db/master-data.js
     VALIDATE $? "products Loading"
